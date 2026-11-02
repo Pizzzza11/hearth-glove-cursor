@@ -167,7 +167,8 @@ def hearth_ibeam(size: int) -> Image.Image:
     center = high_size // 2
     top = round(high_size * 0.12)
     bottom = round(high_size * 0.88)
-    stem_half = max(scale, round(high_size * 0.045))
+    stem_half = max(2, round(high_size * 0.022))
+    stem_outline = max(2, round(high_size * 0.012))
     serif_half = round(high_size * 0.18)
     serif_height = max(scale * 2, round(high_size * 0.075))
     outline = max(scale, round(high_size * 0.025))
@@ -178,8 +179,8 @@ def hearth_ibeam(size: int) -> Image.Image:
 
     # Dark silhouette keeps the I-beam readable on both white and dark text fields.
     draw.rounded_rectangle(
-        (center - stem_half - outline, top, center + stem_half + outline, bottom),
-        radius=outline,
+        (center - stem_half - stem_outline, top, center + stem_half + stem_outline, bottom),
+        radius=stem_outline,
         fill=dark,
     )
     draw.rounded_rectangle(
@@ -198,7 +199,7 @@ def hearth_ibeam(size: int) -> Image.Image:
         radius=max(1, outline // 2),
         fill=ivory,
         outline=gold,
-        width=outline,
+        width=stem_outline,
     )
     draw.rounded_rectangle(
         (center - serif_half, top + outline, center + serif_half, top + serif_height),
@@ -217,7 +218,7 @@ def hearth_ibeam(size: int) -> Image.Image:
 
     gem = max(scale * 2, round(high_size * 0.055))
     draw.polygon(
-        ((center, center - gem), (center + gem, center), (center, center + gem), (center - gem, center)),
+        ((center, center - gem), (center + stem_half, center), (center, center + gem), (center - stem_half, center)),
         fill=(241, 186, 68, 255),
         outline=dark,
     )

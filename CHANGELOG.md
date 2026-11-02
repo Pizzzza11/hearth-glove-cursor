@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.1 — 2026-11-02
+
+- Narrow the text-selection I-beam stem and its outline; keep the top/bottom bars, colors and hotspot unchanged.
+- Narrow the center ornament to match the stem at 32/48/64 pixel sizes.
+
 ## 1.0.0 — 2026-11-02
 
 - Initial public Windows package with double-click install, start, stop, status and uninstall entry points.
