@@ -6,7 +6,9 @@ $exe = Join-Path $PackageDirectory 'HearthGloveCursor.exe'
 $installed = Join-Path $env:LOCALAPPDATA 'HearthGloveCursor'
 $installedExe = Join-Path $installed 'HearthGloveCursor.exe'
 function Invoke-Setup([string]$Command) {
-    $p = Start-Process -FilePath $exe -ArgumentList "$Command --quiet" -Wait -PassThru
+    # Wait for the setup process only, not its deliberately long-lived guard children.
+    $p = Start-Process -FilePath $exe -ArgumentList "$Command --quiet" -PassThru
+    if (-not $p.WaitForExit(30000)) { $p.Kill(); throw 'Setup command timed out.' }
     if ($p.ExitCode -ne 0) { throw (Get-Content (Join-Path $env:TEMP 'HearthGloveCursor-management.txt') -Raw) }
 }
 function Guards {
