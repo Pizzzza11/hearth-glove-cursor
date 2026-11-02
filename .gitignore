@@ -1,0 +1,15 @@
+bin/
+dist/
+__pycache__/
+*.pyc
+*.log
+*.old
+*.pid
+*.stop
+*.backup
+original-backup-*.json
+restored-backup-*.json
+original-backup-*.xml
+restored-backup-*.xml
+cursor-backup.json
+.vs/
